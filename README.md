@@ -37,7 +37,7 @@ python -m venv venv
 No Windows:
 
 ```bash
-venv\Scripts\activate
+venv\Scripts\activate.bat
 ```
 
 Em sistemas baseados em Unix (Linux/Mac):
@@ -66,4 +66,4 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
 
-Criado por [Lucas Hashimoto](https://github.com/Lucasch1) - [Aron Burgos](https://github.com/) - - [Isa Sigaki](https://github.com/)- - [Fernanda Diniz](https://github.com/) - 2023.
+Criado por [Lucas Hashimoto](https://www.linkedin.com/in/lucas-hashimoto/) - [Aron Burgos](https://www.linkedin.com/in/aron-miranda-burgos-57a99a169/) - [Isabela Sigaki](https://www.linkedin.com/in/isabela-sigaki/) - [Fernanda Diniz](https://www.linkedin.com/in/fernandadinizmarinho/) - 2023.
