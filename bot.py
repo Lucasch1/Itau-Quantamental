@@ -1,4 +1,5 @@
 from getData import *
+import matplotlib.pyplot as plt
 
 print('Bem vindo ao bot de análise de ativos!')
 print('Para comecar escolha o que deseja fazer:')
@@ -38,4 +39,3 @@ elif op == '2':
     dat = getData(tkr, '2019-01-01', '2023-07-24')
     dat = getSma(dat, 15)
     print(dat.head(30))
-

@@ -8,7 +8,7 @@ tkrs = tkrs["Codigo"].tolist()
 for i in range(len(tkrs)):
     tkrs[i] = tkrs[i] + ".SA"
 
-start = '2022-01-01'
+start = '2021-01-01'
 end = '2023-07-25'
 df = getDataAdjClose(tkrs, start, end)
 # print(df.head(50))
@@ -35,11 +35,18 @@ for ativo1, ativo2 in itertools.combinations(tkrs, 2):
 pares_cointegrados.sort(key=lambda x: x[2])
 
 
-with open('pares_cointegrados.txt', 'w') as arquivo:
+with open('pares_cointegrados.csv', 'w') as arquivo:
+    arquivo.write('Ativo 1;Ativo 2;Valor-p\n')
     for par in pares_cointegrados:
-        arquivo.write(f'{par[0]}, {par[1]} - Valor-p: {par[2]}\n')
+        arquivo.write(f'{par[0]};{par[1]};{par[2]}\n')
 
-print("Pares cointegrados salvos em 'pares_cointegrados.txt'.")
+print("Pares cointegrados salvos em 'pares_cointegrados.csv'.")
 
+cointegrados = pd.read_csv('pares_cointegrados.csv', sep=';')
+ratioPares = pd.DataFrame()
+for i in range(len(cointegrados)):
+    ratioPares[cointegrados['Ativo 1'][i] + '/' + cointegrados['Ativo 2']
+               [i]] = df[cointegrados['Ativo 1'][i]] / df[cointegrados['Ativo 2'][i]]
 
-# print(dfPct.head(50))
+print(ratioPares.head())
+ratioPares.to_csv('ratioPares.csv', sep=';')
