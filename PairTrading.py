@@ -50,3 +50,5 @@ for i in range(len(cointegrados)):
 
 print(ratioPares.head())
 ratioPares.to_csv('ratioPares.csv', sep=';')
+
+# y retorno  = beta0 + beta1 * marketcap + beta2 * priceToBookValue + erro
