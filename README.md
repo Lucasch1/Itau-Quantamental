@@ -1,22 +1,23 @@
-# Bot Quant - Estratégia de Pairs Trading com Machine Learning
+# Bot Quant - Estratégia de Pairs Trading com Análise de Cointegração
 
 ![Bot Quant](https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2MzkyMXwwfDF8c2VhcmNofDF8fHRyYWRpbmd8ZW58MHx8fHwxNjkwMzA3ODU4fDA&ixlib=rb-4.0.3&q=80&w=200)
 
-Este projeto tem como objetivo desenvolver um bot quantitativo para automatizar estratégias de negociação nos mercados financeiros. O bot utilizará a estratégia de Pairs Trading com Machine Learning para identificar pares cointegrados de ativos e prever a tendência de seus ratios, buscando lucrar com a volta à média quando o ratio se desvia significativamente da média histórica.
+Este projeto visa desenvolver um bot quantitativo para automatizar estratégias de negociação nos mercados financeiros, com foco na Estratégia de Pairs Trading. O bot utiliza análise de cointegração para identificar pares de ativos que apresentam comportamento co-movimentado e, a partir desses pares, calcula e monitora as razões de preços (ratios) para explorar oportunidades de negociação quando essas razões se desviam da média histórica.
 
 ## Funcionalidades
 
--   [ ] Conexão com APIs de dados de mercado
--   [ ] Identificação de pares cointegrados de ativos
--   [ ] Cálculo do ratio para cada par cointegrado
--   [ ] Treinamento de modelo de Machine Learning para prever a tendência do ratio
--   [ ] Execução automatizada de operações de compra e venda
--   [ ] Gerenciamento de risco e controle de posição
--   [ ] Monitoramento e análise de resultados
+-   [x] Conexão com APIs de dados de mercado.
+-   [x] Identificação de pares cointegrados de ativos.
+-   [x] Cálculo das razões de preços (ratios) para cada par cointegrado.
+-   [x] Seleção de pares com distribuição mais normal das razões.
+-   [ ] Avaliação da reversão à média das razões.
+-   [ ] Execução automatizada de operações de compra e venda.
+-   [ ] Gerenciamento de risco e controle de posição.
+-   [ ] Monitoramento e análise contínua de resultados.
 
 ## Instalação
 
-Certifique-se de ter o Python instalado em seu sistema. Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
+Certifique-se de ter o Python instalado no sistema. Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
 
 1. Clone este repositório para o seu ambiente local:
 
@@ -27,7 +28,7 @@ git clone https://github.com/Lucasch1/Itau-Quantamental.git
 2. Acesse o diretório do projeto:
 
 ```bash
-cd bot-quant
+cd Itau-Quantamental
 ```
 
 3. Crie um ambiente virtual (recomendado) e ative-o:
@@ -56,49 +57,45 @@ pip install -r requirements.txt
 
 ## Utilização
 
-1. Coleta de Dados:
+1. **Coleta de Dados:**
 
     - Obtenha dados históricos de preços de ativos financeiros utilizando uma API ou fontes de dados como o Yahoo Finance.
 
-2. Pré-processamento dos Dados:
+2. **Pré-processamento dos Dados:**
 
     - Limpe e normalize os dados para prepará-los para análise.
 
-3. Identificação de Pares Cointegrados:
+3. **Identificação de Pares Cointegrados:**
 
     - Utilize técnicas de cointegração para identificar pares de ativos cointegrados.
 
-4. Cálculo do Ratio:
+4. **Cálculo do Ratio:**
 
     - Calcule o ratio para cada par cointegrado.
 
-5. Treinamento do Modelo de Machine Learning:
+5. **Seleção de Pares e Verificação de Normalidade:**
 
-    - Utilize dados históricos do ratio para treinar o modelo de Machine Learning capaz de prever a tendência futura.
+    - Escolha pares cointegrados com razões que apresentam uma distribuição mais próxima da normal.
 
-6. Backtesting:
+6. **Avaliação de Reversão à Média:**
 
-    - Realize o backtesting da estratégia usando dados históricos para avaliar o desempenho do modelo.
+    - Analise a reversão à média das razões mais normalmente distribuidas.
 
-7. Definição de Sinais:
+7. **Execução de Operações:**
 
-    - Estabeleça critérios para acionar sinais de negociação com base nas previsões do modelo.
+    - Com base nos pares restantes apos o filtro, execute operações de compra e venda dos ativos com razões fora da média.
 
-8. Execução de Operações:
-
-    - Com base nos sinais gerados pelo modelo, execute as operações de compra e venda dos ativos apropriados.
-
-9. Gerenciamento de Risco:
+8. **Gerenciamento de Risco:**
 
     - Implemente um sistema de gerenciamento de risco para controlar a alocação de capital em cada operação.
 
-10. Monitoramento Contínuo:
+9. **Monitoramento Contínuo:**
 
--   Monitore o desempenho da estratégia em tempo real e faça ajustes conforme necessário.
+    - Monitore o desempenho da estratégia em tempo real e faça ajustes conforme necessário.
 
 ## Considerações Finais
 
-A estratégia de Pairs Trading com Machine Learning é complexa e requer um conhecimento sólido em finanças quantitativas, aprendizado de máquina e programação. Antes de aplicá-la em um ambiente de negociação real, conduza uma extensa pesquisa, teste a estratégia em dados históricos e implemente um gerenciamento rigoroso de riscos.
+A estratégia de Pairs Trading com Análise de Cointegração é complexa e requer conhecimentos em finanças quantitativas, análise de dados e programação. Antes de aplicá-la em um ambiente de negociação real, conduza uma extensa pesquisa, teste a estratégia em dados históricos e implemente um gerenciamento rigoroso de riscos.
 
 Consultar especialistas em finanças quantitativas e realizar testes exaustivos é fundamental para aumentar a probabilidade de sucesso. Opere com cautela e responsabilidade, pois todas as estratégias de negociação envolvem riscos e podem levar a perdas significativas.
 
