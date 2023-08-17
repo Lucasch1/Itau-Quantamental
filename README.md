@@ -9,7 +9,7 @@ Este projeto visa desenvolver um bot quantitativo para automatizar estratégias 
 -   [x] Conexão com APIs de dados de mercado.
 -   [x] Identificação de pares cointegrados de ativos.
 -   [x] Cálculo das razões de preços (ratios) para cada par cointegrado.
--   [x] Seleção de pares com distribuição mais normal das razões.
+-   [ ] Seleção de pares com distribuição mais normal das razões.
 -   [ ] Avaliação da reversão à média das razões.
 -   [ ] Execução automatizada de operações de compra e venda.
 -   [ ] Gerenciamento de risco e controle de posição.
