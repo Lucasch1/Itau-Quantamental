@@ -20,8 +20,9 @@ def main():
     pares_cointegrados = calcs.cointegrate_data(cluster, df_pct)
 
     calcs.save_coint_pairs(pares_cointegrados)
-    calcs.calc_and_save_ratios(df)
-
+    ratios = calcs.calc_and_save_ratios(df)
+    normal = calcs.check_normality(ratios)
+    pass
 
 if __name__ == "__main__":
     main()
