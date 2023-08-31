@@ -55,8 +55,12 @@ def check_normality(ratios: pd.DataFrame) -> dict[str, float]:
     normal = {}
     for col in check.columns:
         test = shapiro(check[col].values)
-        if test.pvalue > 0.05:
+        if test.pvalue < 0.05:
             normal[col] = test.pvalue
-
+    normal = dict(sorted(normal.items(), key=lambda item: item[1], reverse=True))
+    normal = {k: [j] for k,j in normal.items()}
+    df = pd.DataFrame(normal)
+    df = df.T
+    df.to_csv("src/output/ratiosNormalizados.csv", sep=";")
     return normal
     
