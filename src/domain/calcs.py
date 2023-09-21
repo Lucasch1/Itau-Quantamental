@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import itertools
 import statsmodels.api as sm
 from scipy.stats import shapiro
@@ -46,7 +47,7 @@ def calc_and_save_ratios(df: pd.DataFrame) -> pd.DataFrame:
             df[cointegrados["Ativo 1"][i]] / df[cointegrados["Ativo 2"][i]]
         )
 
-    print(ratio_pares.head(50))
+    # print(ratio_pares.head(50))
     ratio_pares.to_csv("src/output/ratioPares.csv", sep=";")
     return ratio_pares
 
@@ -62,5 +63,14 @@ def check_normality(ratios: pd.DataFrame) -> dict[str, float]:
     df = pd.DataFrame(normal)
     df = df.T
     df.to_csv("src/output/ratiosNormalizados.csv", sep=";")
-    return normal
+    return normal, df
     
+def checkMeanReverting(ratios: pd.DataFrame):
+    diffs = ratios - np.mean(ratios)
+
+    # tempo = np.diff(range(1 + len(ratios)))
+    tempo = np.arange(1, len(ratios) + 1)
+    taxaReversao = -1 / np.mean(diffs/ tempo)
+    tempoMedioReversao = - (1 / taxaReversao)
+
+    return taxaReversao, tempoMedioReversao
