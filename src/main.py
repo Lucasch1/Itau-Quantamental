@@ -6,7 +6,7 @@ import pandas as pd
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.database import mkt_data
-from src.domain import clustering
+from src.domain import clustering, pre_processing
 
 
 def main():
@@ -17,6 +17,7 @@ def main():
     df_pct = df.pct_change()
     df_pct = df_pct.dropna()
 
+    train, test = pre_processing.split_train_test_data(df_pct)
     cluster = clustering.cluster_data(df_pct)
     pares_cointegrados = calcs.cointegrate_data(cluster, df_pct)
 
@@ -41,7 +42,7 @@ def main():
     })
     resultado_df = resultado_df.sort_values(by='Taxa de Reversao', ascending=False)
     resultado_df.to_csv("src/output/MeanReverting.csv", sep=";")
-    pass
+
 
 if __name__ == "__main__":
     main()
