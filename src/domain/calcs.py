@@ -4,6 +4,7 @@ import itertools
 import statsmodels.api as sm
 from scipy.stats import shapiro
 
+
 def cointegrate_data(
     cluster_df: pd.DataFrame, df_pct: pd.DataFrame
 ) -> list[tuple[str, str, float]]:
@@ -51,6 +52,7 @@ def calc_and_save_ratios(df: pd.DataFrame) -> pd.DataFrame:
     ratio_pares.to_csv("src/output/ratioPares.csv", sep=";")
     return ratio_pares
 
+
 def check_normality(ratios: pd.DataFrame) -> dict[str, float]:
     check = ratios.copy()
     normal = {}
@@ -59,18 +61,22 @@ def check_normality(ratios: pd.DataFrame) -> dict[str, float]:
         if test.pvalue < 0.05:
             normal[col] = test.pvalue
     normal = dict(sorted(normal.items(), key=lambda item: item[1], reverse=True))
-    normal = {k: [j] for k,j in normal.items()}
+    normal = {k: [j] for k, j in normal.items()}
     df = pd.DataFrame(normal)
     df = df.T
     df.to_csv("src/output/ratiosNormalizados.csv", sep=";")
     return normal, df
-    
-def checkMeanReverting(ratios: pd.DataFrame):
-    diffs = ratios - np.mean(ratios)
 
-    # tempo = np.diff(range(1 + len(ratios)))
-    tempo = np.arange(1, len(ratios) + 1)
-    taxaReversao = -1 / np.mean(diffs/ tempo)
-    tempoMedioReversao = - (1 / taxaReversao)
 
-    return taxaReversao, tempoMedioReversao
+def checkMeanReverting(ratios: pd.DataFrame) -> float:
+    returns = ratios.copy().to_frame()
+    returns["returns"] = returns[ratios.name].pct_change()
+    returns["returns_shift"] = returns["returns"].shift()
+    returns.dropna(inplace=True)
+
+    lag = sm.add_constant(returns["returns_shift"])
+    model = sm.OLS(returns["returns"], lag)
+    res = model.fit()
+    half_life = -np.log(2) / res.params[1]
+
+    return half_life

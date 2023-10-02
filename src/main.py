@@ -24,23 +24,19 @@ def main():
     calcs.save_coint_pairs(pares_cointegrados)
     ratios = calcs.calc_and_save_ratios(df)
     normal, normalDf = calcs.check_normality(ratios)
-    # print(normalDf)
-    listaTaxaReversao = []
+
     listaTempoMedioReversao = []
     listaNomePar = []
     for i in range(0, 15):
-        taxa_reversao, tempo_medio_reversao = calcs.checkMeanReverting(ratios[normalDf.index[i]]) 
-        # print(normalDf.index[i], taxa_reversao, tempo_medio_reversao)
-        listaTaxaReversao.append(taxa_reversao)
+        tempo_medio_reversao = calcs.checkMeanReverting(ratios[normalDf.index[i]])
         listaTempoMedioReversao.append(tempo_medio_reversao)
         listaNomePar.append(normalDf.index[i])
 
-    resultado_df = pd.DataFrame({
-        'Par': listaNomePar,
-        'Taxa de Reversao': listaTaxaReversao,
-        'Tempo Medio de Reversao': listaTempoMedioReversao
-    })
-    resultado_df = resultado_df.sort_values(by='Taxa de Reversao', ascending=False)
+    resultado_df = pd.DataFrame(
+        {"Par": listaNomePar, "Tempo Medio de Reversao": listaTempoMedioReversao}
+    )
+    resultado_df = resultado_df[resultado_df["Tempo Medio de Reversao"] > 0]
+    resultado_df = resultado_df.sort_values(by="Tempo Medio de Reversao")
     resultado_df.to_csv("src/output/MeanReverting.csv", sep=";")
 
 
