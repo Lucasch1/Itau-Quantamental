@@ -18,6 +18,7 @@ def main():
     df_pct = df_pct.dropna()
 
     train, test = pre_processing.split_train_test_data(df_pct)
+    
     cluster = clustering.cluster_data(df_pct)
     pares_cointegrados = calcs.cointegrate_data(cluster, df_pct)
 
@@ -38,6 +39,7 @@ def main():
     resultado_df = resultado_df[resultado_df["Tempo Medio de Reversao"] > 0]
     resultado_df = resultado_df.sort_values(by="Tempo Medio de Reversao")
     resultado_df.to_csv("src/output/MeanReverting.csv", sep=";")
+    print(train, test)
 
 
 if __name__ == "__main__":
