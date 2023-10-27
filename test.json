@@ -1,0 +1,14 @@
+{
+    "Name": "MULT3.SA/CCRO3.SA",
+    "stock1": "MULT3.SA",
+    "stock2": "CCRO3.SA",
+    "status": true,
+    "status_1": false,
+    "status_-1": true,
+    "exposition": 0,
+    "returns": 0,
+    "stock1_buy_price": [0, 20.649611],
+    "stock2_buy_price": [],
+    "stock1_sell_price": [],
+    "stock2_sell_price": [0, 12.689862]
+}
