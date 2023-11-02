@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 def pair_trading_strategy(data, pair_file, ratio_file):
     """
@@ -184,6 +184,23 @@ def backtest(data, strategy, pair_file, ratio_file, max_exposition):
         resultados.append(status_LS)
     print(resultados[0])
 
+    results = pd.DataFrame(resultados)
+    results_for_plot = results[["Name", "returns"]]
+    results_for_plot = results_for_plot.explode("returns")
+
+    for pair in results_for_plot["Name"].unique():
+        df_pair = results_for_plot.loc[results_for_plot["Name"] == pair] 
+        size = df_pair.shape[0]
+        vals = range(1, size+1, 1)  
+        df_pair["trades"] = vals
+        df_pair = df_pair[["returns", "trades"]].set_index("trades")
+        df_pair.loc[0] = 0
+        df_pair.sort_index(inplace=True)
+        df_pair["returns"] = df_pair["returns"].cumsum()
+        df_pair.rename(columns={"returns": "PnL Acumulado"}, inplace=True)
+        df_pair.plot()
+        plt.title(pair)
+        plt.show()
 
     return resultados
 
